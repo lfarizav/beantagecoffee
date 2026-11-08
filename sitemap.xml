@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://beantagecoffee.com/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/en/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/experiencia/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/experiencia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/experiencia/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/en/experience/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/experiencia/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/experience/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/experiencia/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/libro/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/libro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/libro/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/en/book/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/libro/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/book/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/libro/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/preguntas/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/preguntas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/preguntas/"/>
+  </url>
+  <url>
+    <loc>https://beantagecoffee.com/en/faq/</loc>
+    <lastmod>2026-11-08</lastmod>
+    <xhtml:link rel="alternate" hreflang="es" href="https://beantagecoffee.com/preguntas/"/>
+    <xhtml:link rel="alternate" hreflang="en" href="https://beantagecoffee.com/en/faq/"/>
+    <xhtml:link rel="alternate" hreflang="x-default" href="https://beantagecoffee.com/preguntas/"/>
+  </url>
+</urlset>

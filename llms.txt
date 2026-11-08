@@ -1,0 +1,23 @@
+# Beantage Specialty Coffee Roasters
+
+> Beantage offers two specialty coffee experiences in Bogotá, Colombia: a private cupping and a walking coffee tour through three coffee shops. Whoever buys the experience receives the book "Specialty Coffee: From Seed to Cup" by Luis Felipe Ariza Vesga as a gift; chapter 1 is free. Booking is by WhatsApp (+57 313 398 0338); groups of 4 to 8 get 20% off. The site is in Spanish (default) and English.
+
+## Español
+
+- [Inicio](https://beantagecoffee.com/): la casa de Beantage y un recorrido visual por el mundo del café de especialidad.
+- [La experiencia](https://beantagecoffee.com/experiencia/): cata privada y recorrido de café en Bogotá, cómo reservar y descuento para grupos.
+- [El libro](https://beantagecoffee.com/libro/): "Café de especialidad: de la semilla a la taza", libro de regalo con capítulo 1 gratis.
+- [Preguntas frecuentes](https://beantagecoffee.com/preguntas/): reserva, idiomas, descuento, libro y qué es el café de especialidad.
+
+## English
+
+- [Home](https://beantagecoffee.com/en/): Beantage and a visual tour of specialty coffee.
+- [The experience](https://beantagecoffee.com/en/experience/): private cupping and coffee tour in Bogotá, how to book, group discount.
+- [The book](https://beantagecoffee.com/en/book/): "Specialty Coffee: From Seed to Cup", the gift book with a free chapter 1.
+- [FAQ](https://beantagecoffee.com/en/faq/): booking, languages, discount, the book and what specialty coffee is.
+
+## Optional
+
+- [Viator listing](https://www.viator.com/es-CO/tours/Bogota/Unique-Walking-Tour-for-Specialty-Coffee-Lovers-and-Truth-Seekers/d4560-455931P1)
+- [Tripadvisor listing](https://www.tripadvisor.co/AttractionProductReview-g294074-d27455385-Private_Guided_Walking_Tour_and_Coffee_Workshop_in_Bogota-Bogota.html)
+- [Sitemap](https://beantagecoffee.com/sitemap.xml)

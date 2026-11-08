@@ -1,0 +1,25 @@
+/* Beantage sample reader. Uses tokens from site.css, with fallbacks. */
+.bk { margin: 0 auto; max-width: 1100px; outline: none; }
+.bk:focus-visible { outline: 2px solid var(--cereza, #a8322a); outline-offset: 6px; border-radius: 8px; }
+.bk__stage { position: relative; padding: clamp(12px, 3vw, 32px) 0; display: flex; justify-content: center;
+  background: radial-gradient(ellipse at 50% 40%, rgba(199,154,75,.18), transparent 70%); border-radius: var(--radio, 14px); }
+.bk__flip { margin: 0 auto; }
+.bk__page { background: #fffdf8; overflow: hidden; }
+.bk__page img { display: block; width: 100%; height: 100%; object-fit: cover; user-select: none; -webkit-user-drag: none; }
+.bk__end { display: flex; align-items: center; justify-content: center; text-align: center; padding: 12%;
+  background: var(--papel-2, #e8dccb); color: var(--tinta, #2a1d15); }
+.bk__end-t { font-family: var(--f-display, Georgia, serif); font-size: clamp(16px, 2.4vw, 26px); margin: 0 0 .6em; }
+.bk__end-p { font-family: var(--f-texto, system-ui, sans-serif); font-size: clamp(12px, 1.4vw, 16px); margin: 0; color: var(--tinta-2, #5b4636); }
+.bk__bar { display: flex; align-items: center; justify-content: center; gap: 16px; margin-top: 14px; }
+.bk__count { min-width: 12ch; text-align: center; font: 500 14px/1 var(--f-mono, ui-monospace, monospace); color: var(--tinta-2, #5b4636); }
+.bk__btn { width: 44px; height: 44px; border-radius: 50%; border: 1px solid var(--linea, rgba(42,29,21,.14));
+  background: var(--papel-2, #e8dccb); color: var(--tinta, #2a1d15); cursor: pointer; display: grid; place-items: center; }
+.bk__btn svg { width: 20px; height: 20px; fill: none; stroke: currentColor; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.bk__btn:hover:not(:disabled) { background: var(--cereza, #a8322a); color: #fff; }
+.bk__btn:focus-visible { outline: 2px solid var(--cereza, #a8322a); outline-offset: 3px; }
+.bk__btn:disabled { opacity: .35; cursor: default; }
+.bk__hint { text-align: center; font-size: 13px; color: var(--tinta-2, #5b4636); margin: 10px 0 0; }
+/* reduced motion fallback: plain scroll of the page images */
+.bk.is-scroll .bk__stage { flex-direction: column; align-items: center; gap: 16px; max-height: 80vh; overflow-y: auto; background: none; }
+.bk.is-scroll .bk__page { width: min(100%, 560px); aspect-ratio: 770 / 990; box-shadow: 0 2px 12px rgba(42,29,21,.18); }
+.bk.is-scroll .bk__bar, .bk.is-scroll .bk__hint { display: none; }
