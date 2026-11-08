@@ -2,7 +2,7 @@
 // The scroll position picks the active scene and drives its camera rig.
 import * as THREE from 'three';
 import { RoomEnvironment } from 'three/addons/environments/RoomEnvironment.js';
-import * as P from './props.js?v=20261108b';
+import * as P from './props.js?v=20261108c';
 
 const V = (x, y, z) => new THREE.Vector3(x, y, z);
 const clamp = (x, a = 0, b = 1) => Math.min(b, Math.max(a, x));

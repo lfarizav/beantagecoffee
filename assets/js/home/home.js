@@ -94,7 +94,7 @@ async function start() {
     document.addEventListener('visibilitychange', kick);
     let rt = 0;
     addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { setHdr(); world.resize(); ST.refresh(); }, 120); });
-    matchMedia('(prefers-color-scheme: dark)').addEventListener('change', () => setTimeout(() => world.setBackground(paper()), 50));
+    window.addEventListener('bt-theme-change', () => setTimeout(() => world.setBackground(paper()), 50));
     matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => { if (e.matches) { cancelAnimationFrame(raf); visible = false; giveUp(); } });
     window.__home = { world, get p() { return current; }, get q() { return q; },
       // test hook: settle the scroll target, render once, stop the loop

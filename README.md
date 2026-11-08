@@ -15,7 +15,7 @@ Static, bilingual site for Beantage Specialty Coffee Roasters (Bogotá, Colombia
 | `scripts/build_sitemap.py` | Regenerates `sitemap.xml` (lastmod from git, hreflang alternates) |
 | `.github/workflows/pages.yml` | Deploy to GitHub Pages on push to `main` |
 
-Assets are versioned with `?v=20261108b` (Cloudflare caches for 4 h). Bump the string in every page when CSS/JS change.
+Assets are versioned with `?v=20261108c` (Cloudflare caches for 4 h). Bump the string in every page when CSS/JS change.
 
 ## Run locally
 

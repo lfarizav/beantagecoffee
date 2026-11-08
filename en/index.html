@@ -2,11 +2,12 @@
 <html lang="en">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem("bt-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Beantage | Specialty coffee cupping and tour in Bogotá</title>
 <meta name="description" content="Private coffee cupping and a specialty coffee shop tour in Bogotá, with the book &quot;Specialty Coffee: From Seed to Cup&quot; as a gift. Book on WhatsApp.">
 <meta name="author" content="Beantage Specialty Coffee Roasters">
-<meta name="color-scheme" content="light dark">
+<meta name="color-scheme" content="light">
 <meta name="theme-color" content="#f3ece1">
 <link rel="canonical" href="https://beantagecoffee.com/en/">
 <link rel="alternate" hreflang="es" href="https://beantagecoffee.com/">
@@ -32,8 +33,8 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2032%2032%27%3E%3Cellipse%20cx=%2716%27%20cy=%2716%27%20rx=%2710%27%20ry=%2714%27%20fill=%27%23a8322a%27%20transform=%27rotate(25%2016%2016)%27/%3E%3Cpath%20d=%27M12%205c-5%208%207%2014%202%2022%27%20stroke=%27%23f3ece1%27%20stroke-width=%272.2%27%20fill=%27none%27%20stroke-linecap=%27round%27%20transform=%27rotate(25%2016%2016)%27/%3E%3C/svg%3E">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261108b">
-<link rel="stylesheet" href="/assets/css/home.css?v=20261108b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261108c">
+<link rel="stylesheet" href="/assets/css/home.css?v=20261108c">
 <script>
 /* 3D only with WebGL2 and no reduced-motion request; otherwise the static illustrated panels stay. */
 (function(){var d=document.documentElement,ok=false;try{ok=!matchMedia('(prefers-reduced-motion: reduce)').matches&&!!window.WebGL2RenderingContext&&!!document.createElement('canvas').getContext('webgl2');}catch(e){}d.classList.add(ok?'con-3d':'sin-3d');})();
@@ -121,6 +122,7 @@
 }
 </script>
 <!-- data-pendiente: precio, duración, horario, punto de encuentro y calificación no están confirmados; no se publican. -->
+<script src="/assets/js/theme.js?v=20261108c" defer></script>
 </head>
 <body class="home">
 <a class="skip" href="#contenido">Skip to content</a>
@@ -137,6 +139,7 @@
       <a href="/" hreflang="es" lang="es" data-lang-link="es">ES</a>
       <a href="/en/" hreflang="en" lang="en" data-lang-link="en" aria-current="true">EN</a>
     </div>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Switch to dark mode" title="Switch to dark mode"><svg class="ico-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ico-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
     <a class="btn btn--sm" href="https://wa.me/573133980338?text=Hi%2C%20I%20would%20like%20to%20book%20the%20specialty%20coffee%20experience%20in%20Bogot%C3%A1." rel="noopener">Book now</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Open menu"><span aria-hidden="true"></span></button>
   </div>
@@ -176,7 +179,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
           </ul>
         </div>
         <a class="regalo" href="/en/book/">
-          <img src="/assets/book/cover.webp?v=20261108b" alt="Cover of the book Specialty Coffee: From Seed to Cup" width="150" height="225" loading="eager" decoding="async">
+          <img src="/assets/book/cover.webp?v=20261108c" alt="Cover of the book Specialty Coffee: From Seed to Cup" width="150" height="225" loading="eager" decoding="async">
           <span class="regalo__txt">
             <small>Included as a gift</small>
             <b>Specialty Coffee: From Seed to Cup</b>
@@ -255,7 +258,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-1-cata.webp?v=20261108b" alt="A group cupping around a wooden table" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-1-cata.webp?v=20261108c" alt="A group cupping around a wooden table" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -278,7 +281,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-2-molinos.webp?v=20261108b" alt="Cutaway of three grinding mechanisms and the particle cloud of each" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-2-molinos.webp?v=20261108c" alt="Cutaway of three grinding mechanisms and the particle cloud of each" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -302,7 +305,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-3-procesos.webp?v=20261108b" alt="Route from pulping to drying, branching into washed, honey and natural" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-3-procesos.webp?v=20261108c" alt="Route from pulping to drying, branching into washed, honey and natural" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -326,7 +329,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-4-metodos.webp?v=20261108b" alt="Eight brewing methods, from the olleta to espresso" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-4-metodos.webp?v=20261108c" alt="Eight brewing methods, from the olleta to espresso" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -352,7 +355,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-5-historia.webp?v=20261108b" alt="Illustrated route of coffee from Ethiopia to Paris, 6th to 18th century" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-5-historia.webp?v=20261108c" alt="Illustrated route of coffee from Ethiopia to Paris, 6th to 18th century" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -376,7 +379,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-6-regiones.webp?v=20261108b" alt="The three mountain ranges and the Sierra Nevada with cherries marking the coffee regions" loading="lazy" decoding="async" width="1200">
+        <img src="/assets/models/fallback/escena-6-regiones.webp?v=20261108c" alt="The three mountain ranges and the Sierra Nevada with cherries marking the coffee regions" loading="lazy" decoding="async" width="1200">
         <figcaption>Illustration from the book</figcaption>
       </figure>
     </article>
@@ -434,6 +437,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
     <p class="site-footer__fine">Beantage Specialty Coffee Roasters, Bogotá, Colombia.</p>
   </div>
 </footer>
-<script type="module" src="/assets/js/home/home.js?v=20261108b"></script>
+<script type="module" src="/assets/js/home/home.js?v=20261108c"></script>
 </body>
 </html>

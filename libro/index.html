@@ -2,6 +2,7 @@
 <html lang="es">
 <head>
 <meta charset="utf-8">
+<script>try{if(localStorage.getItem("bt-theme")==="dark")document.documentElement.dataset.theme="dark"}catch(e){}</script>
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>El libro: Café de especialidad, de la semilla a la taza | Beantage</title>
 <meta name="description" content="Lea gratis el capítulo 1 de &quot;Café de especialidad: de la semilla a la taza&quot;. El libro completo es un regalo para quien reserva la experiencia en Bogotá.">
@@ -28,8 +29,8 @@
 <meta name="twitter:image" content="https://beantagecoffee.com/assets/og/og-home.jpg">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2032%2032%27%3E%3Cellipse%20cx=%2716%27%20cy=%2716%27%20rx=%2710%27%20ry=%2714%27%20fill=%27%23a8322a%27%20transform=%27rotate(25%2016%2016)%27/%3E%3Cpath%20d=%27M12%205c-5%208%207%2014%202%2022%27%20stroke=%27%23f3ece1%27%20stroke-width=%272.2%27%20fill=%27none%27%20stroke-linecap=%27round%27%20transform=%27rotate(25%2016%2016)%27/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com"><link rel="preconnect" href="https://fonts.gstatic.com" crossorigin><link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Instrument+Sans:wght@400;500;600&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/assets/css/site.css?v=20261108b">
-<link rel="stylesheet" href="/assets/reader/reader.css?v=20261108b">
+<link rel="stylesheet" href="/assets/css/site.css?v=20261108c">
+<link rel="stylesheet" href="/assets/reader/reader.css?v=20261108c">
 <style>
 .bk-head{display:grid;gap:clamp(20px,4vw,48px);grid-template-columns:minmax(0,1fr);align-items:center;padding-block:clamp(32px,6vw,72px)}
 @media(min-width:760px){.bk-head{grid-template-columns:minmax(0,1.4fr) minmax(0,.8fr)}}
@@ -84,6 +85,7 @@
   }
  ]
 }</script>
+<script src="/assets/js/theme.js?v=20261108c" defer></script>
 </head>
 <body>
 <a class="skip" href="#contenido">Saltar al contenido</a>
@@ -100,6 +102,7 @@
       <a href="/" hreflang="es" lang="es" data-lang-link="es" aria-current="true">ES</a>
       <a href="/en/" hreflang="en" lang="en" data-lang-link="en">EN</a>
     </div>
+    <button class="theme-toggle" type="button" aria-pressed="false" aria-label="Cambiar a modo oscuro" title="Cambiar a modo oscuro"><svg class="ico-moon" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg><svg class="ico-sun" viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></svg></button>
     <a class="btn btn--sm" href="https://wa.me/573133980338?text=Hola%2C%20quiero%20reservar%20la%20experiencia%20de%20caf%C3%A9%20de%20especialidad%20en%20Bogot%C3%A1." rel="noopener">Reservar</a>
     <button class="nav-toggle" type="button" aria-expanded="false" aria-controls="nav-principal" aria-label="Abrir menú"><span aria-hidden="true"></span></button>
   </div>
@@ -127,14 +130,14 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
    <p>Un libro de Luis Felipe Ariza Vesga, tostador y guía de Beantage Specialty Coffee Roasters en Bogotá. Quince capítulos que siguen al café desde la leyenda de Kaldi hasta la taza que usted se sirve en casa.</p>
    <div class="bk-actions">
     <a class="btn" href="#muestra">Lea el capítulo 1 gratis</a>
-    <a class="btn btn--ghost" href="/assets/book/specialty-coffee-seed-to-cup-es-sample.pdf?v=20261108b" type="application/pdf" download>Descargar la muestra (PDF)</a>
+    <a class="btn btn--ghost" href="/assets/book/specialty-coffee-seed-to-cup-es-sample.pdf?v=20261108c" type="application/pdf" download>Descargar la muestra (PDF)</a>
    </div>
    <p class="bk-by"><small>Capítulo 1, 30 páginas. <a href="/en/book/" hreflang="en">Read in English</a></small></p>
   </div>
-  <picture><source srcset="/assets/book/cover.webp?v=20261108b" type="image/webp"><img src="/assets/book/cover.jpg?v=20261108b" width="800" height="1193" alt="Café de especialidad: de la semilla a la taza"></picture>
+  <picture><source srcset="/assets/book/cover.webp?v=20261108c" type="image/webp"><img src="/assets/book/cover.jpg?v=20261108c" width="800" height="1193" alt="Café de especialidad: de la semilla a la taza"></picture>
  </section>
  <section class="bk-sec" id="muestra" aria-label="Lea el capítulo 1 gratis">
-  <div class="bk" data-lang="es" data-dir="/assets/reader/pages/cafe/es" data-pages="30" data-w="770" data-h="990" data-v="?v=20261108b">
+  <div class="bk" data-lang="es" data-dir="/assets/reader/pages/cafe/es" data-pages="30" data-w="770" data-h="990" data-v="?v=20261108c">
    <div class="bk__stage"></div>
    <div class="bk__bar">
     <button class="bk__btn bk__prev" type="button" aria-label="Página anterior"><svg viewBox="0 0 24 24" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button>
@@ -200,6 +203,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
   </div>
 </footer>
 
-<script type="module" src="/assets/reader/reader.js?v=20261108b"></script>
+<script type="module" src="/assets/reader/reader.js?v=20261108c"></script>
 </body>
 </html>
