@@ -119,3 +119,5 @@ section.block{padding-block:clamp(2rem,6vw,3.5rem)}
 .faq details[open] summary::after{content:"\2212"}
 .faq details>div{padding:0 0 1.1rem}
 @media (prefers-reduced-motion:reduce){*{scroll-behavior:auto!important;transition:none!important;animation:none!important}}
+.site-footer__count{margin-top:1.5rem;color:var(--tinta-2);font:.78rem/1.5 var(--f-mono)}
+.site-footer__count+.site-footer__fine{margin-top:.75rem}
