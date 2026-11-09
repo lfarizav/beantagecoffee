@@ -78,101 +78,8 @@ function leafyShrub(M, h = 1.4, seed = 1, cherries = 16) {
   return s;
 }
 
-/* ---------- Scene 1: cupping table ---------- */
-function sceneCata(M, beanGeo) {
-  const g = new THREE.Group();
-  g.add(mesh(new THREE.BoxGeometry(15, 0.6, 7.5), M.wood, { p: [0, -0.3, 0] }));
-  const cupGeo = P.lathe([[0, 0], [0.3, 0], [0.33, 0.03], [0.34, 0.06], [0.42, 0.25], [0.48, 0.6], [0.5, 0.82], [0.49, 0.85], [0.46, 0.85], [0.45, 0.62], [0.39, 0.28], [0.3, 0.1], [0, 0.09]], 72);
-  const liquidGeo = new THREE.CircleGeometry(0.452, 64);
-  const chunk = new THREE.DodecahedronGeometry(1, 0);
-  const crusts = [];
-  const xs = [-2.9, -1.45, 0, 1.45, 2.9];
-  xs.forEach((x, ci) => {
-    const cup = new THREE.Group(); cup.position.set(x, 0, ci % 2 ? -0.25 : 0.15);
-    cup.add(mesh(cupGeo, M.ceramic));
-    cup.add(mesh(liquidGeo, M.coffee, { p: [0, 0.74, 0], r: [-Math.PI / 2, 0, 0], cast: false }));
-    const n = 900, base = [];
-    const cm = P.scatter(chunk, M.crust, n, (i, r) => {
-      const a = r() * 6.283, rad = Math.sqrt(r()) * 0.43;
-      const o = { x: Math.cos(a) * rad, y: 0.745 + r() * 0.018, z: Math.sin(a) * rad, s: 0.012 + r() * 0.016, sy: 0.5 };
-      base.push(o); return o;
-    }, ['#8a6240', '#7a5434', '#9c7450', '#6a4528', '#b08a62'], 20 + ci);
-    cm.castShadow = false;
-    cup.add(cm);
-    crusts.push({ mesh: cm, base });
-    g.add(cup);
-  });
-  // spoon
-  const spoon = new THREE.Group();
-  const bowl = new THREE.SphereGeometry(0.17, 28, 14, 0, Math.PI * 2, 0, Math.PI / 2);
-  spoon.add(mesh(bowl, M.steel, { r: [Math.PI, 0, 0], s: [1, 0.38, 1.35] }));
-  spoon.add(mesh(new THREE.CylinderGeometry(0.022, 0.03, 1.5, 12), M.steel, { p: [0.95, 0.07, 0], r: [0, 0, Math.PI / 2 + 0.08] }));
-  g.add(spoon);
-  // kettle (inferred object, the book does not describe it)
-  const kettle = new THREE.Group(); kettle.position.set(-4.3, 0, -1.6);
-  kettle.add(mesh(P.lathe([[0, 0], [0.55, 0], [0.62, 0.08], [0.64, 0.55], [0.56, 0.86], [0.3, 1.0], [0.1, 1.04], [0.1, 1.12], [0.16, 1.16], [0, 1.18]]), M.blackSteel));
-  kettle.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(0.55, 0.2, 0), V(0.95, 0.4, 0), V(1.0, 1.0, 0), V(1.25, 1.12, 0)]), 30, 0.035, 10), M.blackSteel));
-  kettle.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(-0.5, 0.85, 0), V(-0.95, 0.75, 0), V(-0.95, 0.3, 0), V(-0.6, 0.2, 0)]), 30, 0.05, 10), M.wood));
-  kettle.rotation.y = -0.5;
-  g.add(kettle);
-  // score sheet on a clipboard
-  g.add(mesh(new THREE.BoxGeometry(1.8, 0.05, 2.4), M.woodLight, { p: [3.9, 0.025, 1.7], r: [0, 0.32, 0] }));
-  g.add(mesh(new THREE.PlaneGeometry(1.6, 2.2), new THREE.MeshStandardMaterial({ map: P.sheetTexture(), roughness: 0.9 }), { p: [3.9, 0.052, 1.7], r: [-Math.PI / 2, 0, 0.32] }));
-  // loose roasted beans
-  g.add(P.scatter(beanGeo, new THREE.MeshPhysicalMaterial({ roughness: 0.4, clearcoat: 0.35 }), 70, (i, r) => {
-    const a = r() * 6.283, d = Math.sqrt(r()) * 0.9;
-    return { x: -2.4 + Math.cos(a) * d, y: 0.04, z: 1.7 + Math.sin(a) * d * 0.6, s: 0.13, rx: Math.PI / 2 * (r() < 0.5 ? 1 : -1), rz: r() * 6.28, ry: 0 };
-  }, ['#3b2414', '#4a2d18', '#2e1b0f', '#553420'], 31));
-  // steam
-  const dot = P.softDot();
-  const steam = [];
-  xs.forEach((x, ci) => {
-    for (let k = 0; k < 4; k++) {
-      const s = new THREE.Sprite(new THREE.SpriteMaterial({ map: dot, color: '#fffaf2', transparent: true, opacity: 0, depthWrite: false }));
-      s.userData = { x, z: ci % 2 ? -0.25 : 0.15, ph: k / 4 + ci * 0.13 };
-      g.add(s); steam.push(s);
-    }
-  });
-  const spoonPath = keyRig([[0, [1.4, 0.06, 1.1], [0, 0, 0]], [0.2, [1.4, 0.06, 1.1], [0, 0, 0]], [0.32, [0.15, 1.1, 0.75], [0, 0, 0]], [0.42, [0.05, 0.78, 0.55], [0, 0, 0]], [0.52, [0.0, 0.76, -0.05], [0, 0, 0]], [0.62, [0.1, 1.2, 0.6], [0, 0, 0]], [0.75, [1.4, 0.06, 1.1], [0, 0, 0]]]);
-  const mtx = new THREE.Matrix4(), q = new THREE.Quaternion(), sc = new THREE.Vector3(), ps = new THREE.Vector3(), eu = new THREE.Euler();
-  let lastB = -1;
-  return {
-    group: g,
-    rig: keyRig([[0, [1.6, 3.6, 6.6], [0.2, 0.55, 0]], [0.32, [2.4, 2.4, 3.4], [0, 0.65, 0]], [0.6, [1.6, 2.2, 2.9], [0, 0.7, 0]], [0.86, [4.4, 3.4, 6.2], [1.8, 0.4, 0.8]], [1, [4.4, 3.4, 6.2], [1.8, 0.4, 0.8]]]),
-    anchors: [
-      { key: 'costra', pos: V(0, 0.9, 0.15), range: [0.12, 0.62] },
-      { key: 'planilla', pos: V(3.9, 0.1, 1.7), range: [0.66, 1] },
-    ],
-    update(t, time) {
-      const sp = spoonPath(t).pos; spoon.position.copy(sp);
-      spoon.rotation.set(0, 0.5, t > 0.3 && t < 0.62 ? -0.35 : 0);
-      const b = smooth(0.42, 0.58, t);
-      if (Math.abs(b - lastB) > 0.001) {
-        lastB = b;
-        const c = crusts[2];
-        c.base.forEach((o, i) => {
-          const a = Math.atan2(o.z, o.x), rad = Math.hypot(o.x, o.z);
-          const push = o.z > -0.1 ? 1 : 0.35;
-          const nr = rad + (0.44 - rad) * b * push;
-          ps.set(Math.cos(a) * nr, o.y - b * 0.02 * ((i % 7) / 7), Math.sin(a) * nr);
-          eu.set(i, i * 0.7, i * 1.3); q.setFromEuler(eu);
-          sc.set(o.s, o.s * 0.5, o.s);
-          mtx.compose(ps, q, sc); c.mesh.setMatrixAt(i, mtx);
-        });
-        c.mesh.instanceMatrix.needsUpdate = true;
-      }
-      steam.forEach((s) => {
-        const u = (time * 0.18 + s.userData.ph) % 1;
-        s.position.set(s.userData.x + Math.sin(time * 0.8 + s.userData.ph * 9) * 0.12 * u, 0.95 + u * 1.1, s.userData.z);
-        s.scale.set(0.22 + u * 0.4, 0.5 + u * 0.9, 1);
-        s.material.opacity = Math.sin(u * Math.PI) * 0.1;
-      });
-    },
-  };
-}
-
-/* ---------- Scenes 2 and 3: pre-rendered Blender sequences ----------
-   Grinders (scene 2) and drying beds (scene 3) are Cycles renders scrubbed by scroll in an overlay
+/* ---------- Scenes 1 to 3: pre-rendered Blender sequences ----------
+   Cupping (scene 1), grinders (scene 2) and drying beds (scene 3) are Cycles renders scrubbed by scroll in an overlay
    (secuencia.js). The 3D world keeps an empty slot so scene indices and spacing stay the same. */
 function sceneVideo() {
   return { group: new THREE.Group(), rig: () => ({ pos: V(0, 4, 10), tgt: V(0, 1, 0) }), anchors: [], update() {}, video: true };
@@ -406,7 +313,7 @@ export function createWorld(canvas, pinEls, opts = {}) {
 
   const M = materials();
   const beanGeo = P.beanGeometry(18, 12);
-  const builders = [sceneCata, sceneVideo, sceneVideo, sceneMetodos, sceneHistoria, sceneColombia];
+  const builders = [sceneVideo, sceneVideo, sceneVideo, sceneMetodos, sceneHistoria, sceneColombia];
   const scenes = builders.map((b, i) => {
     const s = b(M, beanGeo);
     s.group.position.set(i * SPACING, i === 2 || i === 4 || i === 5 ? -0.6 : 0, 0);

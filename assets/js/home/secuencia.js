@@ -1,4 +1,4 @@
-// Scroll-scrubbed Blender renders for scenes 2 (grinders) and 3 (drying beds).
+// Scroll-scrubbed Blender renders for scenes 1 (cupping), 2 (grinders) and 3 (drying beds).
 // A scene is a list of segments; each segment is its own muted H.264 video (keyframe every 12 frames,
 // no B-frames) laid over the WebGL canvas, so one segment can be re-rendered and re-encoded alone
 // (see beantage-work/blender/escena-2-web/README.md). The scene scroll progress picks the segment and
@@ -6,6 +6,11 @@
 // WebP poster shows until the first one can play.
 // frames = number of rendered frames in the segment (24 fps); update it if a segment changes length.
 const SCENES = {
+  // cupping: camera push, then the spoon breaks the crust (beantage-work/blender/escena-1-web/README.md)
+  0: { base: '/assets/video/escena-1-cata', segs: [
+    { id: 'seg1-acercamiento', frames: 36 },
+    { id: 'seg2-romper', frames: 48 },
+  ] },
   1: { base: '/assets/video/escena-2-molinos', segs: [
     { id: 'seg1-orbita', frames: 36 },
     { id: 'seg2-despiece-comandante', frames: 24 },

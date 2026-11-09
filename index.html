@@ -194,15 +194,13 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
 
   <!-- Static fallback images (assets/models/fallback/*.webp) are AI-generated illustrations from the book
        "Café de especialidad: de la semilla a la taza" (images/chapter-NN/fig-0N.png), resized to WebP.
-       Scenes 1 and 4 to 6 are procedural three.js models lit by RoomEnvironment. Scenes 2 and 3 are Blender
-       Cycles renders (Comandante C40 and Pietro grinders; washed, honey and natural drying beds) scrubbed by scroll
+       Scenes 4 to 6 are procedural three.js models lit by RoomEnvironment. Scenes 1 to 3 are Blender Cycles renders
+       (cupping table; Comandante C40 and Pietro grinders; washed, honey and natural drying beds) scrubbed by scroll
        from assets/video/; their fallback images are frames of the same renders. -->
   <section class="escenas" aria-label="Seis escenas del libro">
     <div class="escenario" aria-hidden="true">
       <canvas id="lienzo"></canvas>
       <div class="pines">
-      <span class="pin" data-pin="costra">Romper la costra</span>
-      <span class="pin" data-pin="planilla">Hoja de puntuación</span>
       <span class="pin" data-pin="v60">V60</span>
       <span class="pin" data-pin="chemex">Chemex</span>
       <span class="pin" data-pin="prensa">Prensa francesa</span>
@@ -241,6 +239,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         <p class="escena__pos">1 de 6</p>
         <h2 id="t-cata">Catar café es aprender a nombrarlo</h2>
         <p class="escena__cuerpo">La catación es una manera sistemática de probar el café, pensada para que dos personas, en salas distintas, se entiendan sobre la misma taza. Se huele la fragancia seca, se rompe la costra para liberar el aroma y se sorbe con fuerza para sentir acidez, cuerpo, dulzor y final. Cada atributo se anota y se compara.</p>
+        <p class="escena__nota">En pantalla, una mesa de cata: la cuchara baja y rompe la costra de la tercera taza. Al lado, el formulario de evaluación descriptiva del Coffee Value Assessment de la SCA (2024), que reemplazó al formulario de cata de 2004.</p>
         <div class="planilla">
           <p class="planilla__cab"><span>Del libro</span><span>1/6</span></p>
           <ol>
@@ -254,8 +253,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-1-cata.webp?v=20261108c" alt="Cata en grupo alrededor de una mesa de madera" loading="lazy" decoding="async" width="1200">
-        <figcaption>Ilustración del libro</figcaption>
+        <img src="/assets/models/fallback/escena-1-cata.webp?v=20261109c" alt="Mano que rompe con una cuchara de cata la costra de café en la tercera de cuatro tazas de porcelana sobre una mesa de madera" loading="lazy" decoding="async" width="1600" height="900">
+        <figcaption>Render 3D: mesa de cata</figcaption>
       </figure>
     </article>
     <article class="escena" id="molinos" data-escena="1" aria-labelledby="t-molinos">
@@ -434,6 +433,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
     <p class="site-footer__fine">Beantage Specialty Coffee Roasters, Bogotá, Colombia.</p>
   </div>
 </footer>
-<script type="module" src="/assets/js/home/home.js?v=20261109b"></script>
+<script type="module" src="/assets/js/home/home.js?v=20261109c"></script>
 </body>
 </html>
