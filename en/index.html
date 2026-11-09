@@ -34,7 +34,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300..700;1,9..144,300..600&family=Instrument+Sans:wght@400..700&family=JetBrains+Mono:wght@400;600&display=swap">
 <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg%20xmlns=%27http://www.w3.org/2000/svg%27%20viewBox=%270%200%2032%2032%27%3E%3Cellipse%20cx=%2716%27%20cy=%2716%27%20rx=%2710%27%20ry=%2714%27%20fill=%27%23a8322a%27%20transform=%27rotate(25%2016%2016)%27/%3E%3Cpath%20d=%27M12%205c-5%208%207%2014%202%2022%27%20stroke=%27%23f3ece1%27%20stroke-width=%272.2%27%20fill=%27none%27%20stroke-linecap=%27round%27%20transform=%27rotate(25%2016%2016)%27/%3E%3C/svg%3E">
 <link rel="stylesheet" href="/assets/css/site.css?v=20261108c">
-<link rel="stylesheet" href="/assets/css/home.css?v=20261108c">
+<link rel="stylesheet" href="/assets/css/home.css?v=20261109b">
 <script>
 /* 3D only with WebGL2 and no reduced-motion request; otherwise the static illustrated panels stay. */
 (function(){var d=document.documentElement,ok=false;try{ok=!matchMedia('(prefers-reduced-motion: reduce)').matches&&!!window.WebGL2RenderingContext&&!!document.createElement('canvas').getContext('webgl2');}catch(e){}d.classList.add(ok?'con-3d':'sin-3d');})();
@@ -168,7 +168,7 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
           <a class="btn" href="/en/experience/">See the experience</a>
           <a class="btn btn--ghost" href="https://wa.me/573133980338?text=Hi%2C%20I%20would%20like%20to%20book%20the%20specialty%20coffee%20experience%20in%20Bogot%C3%A1." rel="noopener">Book on WhatsApp</a>
         </div>
-        <p class="portada__oferta">20 % off for groups of 4 to 8 people.</p>
+        <p class="portada__oferta">20 % off for groups of 4 to 8 people.</p>
       </div>
       <aside class="portada__lado">
         <div class="ficha-exp">
@@ -194,19 +194,15 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
 
   <!-- Static fallback images (assets/models/fallback/*.webp) are AI-generated illustrations from the book
        "Café de especialidad: de la semilla a la taza" (images/chapter-NN/fig-0N.png), resized to WebP.
-       3D models are procedural (three.js primitives); lighting uses three.js RoomEnvironment, no HDRI file. -->
+       Scenes 1 and 4 to 6 are procedural three.js models lit by RoomEnvironment. Scenes 2 and 3 are Blender
+       Cycles renders (Comandante C40 and Pietro grinders; washed, honey and natural drying beds) scrubbed by scroll
+       from assets/video/; their fallback images are frames of the same renders. -->
   <section class="escenas" aria-label="Six scenes from the book">
     <div class="escenario" aria-hidden="true">
       <canvas id="lienzo"></canvas>
       <div class="pines">
       <span class="pin" data-pin="costra">Breaking the crust</span>
       <span class="pin" data-pin="planilla">Score sheet</span>
-      <span class="pin" data-pin="planas">Flat burrs</span>
-      <span class="pin" data-pin="conicas">Conical burrs</span>
-      <span class="pin" data-pin="lavado">Washed</span>
-      <span class="pin" data-pin="honey">Honey</span>
-      <span class="pin" data-pin="natural">Natural</span>
-      <span class="pin" data-pin="cerezas">Ripe cherry</span>
       <span class="pin" data-pin="v60">V60</span>
       <span class="pin" data-pin="chemex">Chemex</span>
       <span class="pin" data-pin="prensa">French press</span>
@@ -267,22 +263,22 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         <p class="escena__num" aria-hidden="true">2</p>
         <p class="escena__pos">2 of 6</p>
         <h2 id="t-molinos">Two grinders, two ways to cut</h2>
-        <p class="escena__cuerpo">Grinding multiplies the bean&#x27;s surface and decides how even the extraction will be. The conical grinder faces two toothed cones, one fixed and one turning. The flat grinder uses two horizontal discs spinning fast. Neither dominates: conical tends toward rounder body, flat toward greater clarity.</p>
+        <p class="escena__cuerpo">Grinding multiplies the bean&#x27;s surface and decides how even the extraction will be. The conical grinder faces two toothed cones, one fixed and one turning. The flat-burr grinder uses two facing discs. Neither dominates: conical tends toward rounder body, flat toward greater clarity.</p>
+        <p class="escena__nota">On screen, two hand grinders, assembled and taken apart: the Comandante C40, with a conical burr, and the Pietro, with 58 mm flat burrs set vertically.</p>
         <div class="planilla">
           <p class="planilla__cab"><span>From the book</span><span>2/6</span></p>
           <ol>
             <li>Conical: one fixed cone, one rotating</li>
-            <li>Flat: two horizontal discs, high speed</li>
+            <li>Flat: two facing discs</li>
             <li>Conical: rounder body (tendency)</li>
             <li>Flat: greater clarity (tendency)</li>
             <li>From a few cm² to several m² of surface</li>
-            <li>Blade grinder: worst option for specialty</li>
           </ol>
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-2-molinos.webp?v=20261108c" alt="Cutaway of three grinding mechanisms and the particle cloud of each" loading="lazy" decoding="async" width="1200">
-        <figcaption>Illustration from the book</figcaption>
+        <img src="/assets/models/fallback/escena-2-molinos.webp?v=20261109b" alt="Comandante C40 grinder with a brown glass jar and a black Pietro grinder on a wooden table" loading="lazy" decoding="async" width="1600" height="900">
+        <figcaption>3D render: Comandante C40 and Pietro</figcaption>
       </figure>
     </article>
     <article class="escena" id="procesos" data-escena="2" aria-labelledby="t-procesos">
@@ -291,13 +287,14 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         <p class="escena__pos">3 of 6</p>
         <h2 id="t-procesos">One cherry, three processes, three cups</h2>
         <p class="escena__cuerpo">Parchment is the hard, bone-colored shell that protects each seed while it dries. The washed process removes the mucilage and gives bright acidity. Honey dries the bean with some mucilage left on, gaining body and sweetness. Natural dries the whole cherry and delivers intense fruit.</p>
+        <p class="escena__nota">On screen, three open-air drying beds: washed, honey and natural, first in a side travelling shot and then up close.</p>
         <div class="planilla">
           <p class="planilla__cab"><span>From the book</span><span>3/6</span></p>
           <ol>
             <li>Fermentation: under 48 hours</li>
-            <li>Moisture when washed: 48 to 56 %</li>
-            <li>Dry to 10 to 12 % (Cenicafé)</li>
-            <li>Export standard: 8 to 12.5 %</li>
+            <li>Moisture when washed: 48 to 56 %</li>
+            <li>Dry to 10 to 12 % (Cenicafé)</li>
+            <li>Export standard: 8 to 12.5 %</li>
             <li>Washed: bright acidity, clean cup</li>
             <li>Honey: more body, marked sweetness</li>
             <li>Natural: heavy body, intense fruit</li>
@@ -305,8 +302,8 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
         </div>
       </div>
       <figure class="escena__respaldo">
-        <img src="/assets/models/fallback/escena-3-procesos.webp?v=20261108c" alt="Route from pulping to drying, branching into washed, honey and natural" loading="lazy" decoding="async" width="1200">
-        <figcaption>Illustration from the book</figcaption>
+        <img src="/assets/models/fallback/escena-3-procesos.webp?v=20261109b" alt="Three open-air drying beds: washed, honey and natural coffee" loading="lazy" decoding="async" width="1600" height="900">
+        <figcaption>3D render: washed, honey and natural drying beds</figcaption>
       </figure>
     </article>
     <article class="escena" id="metodos" data-escena="3" aria-labelledby="t-metodos">
@@ -369,9 +366,9 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
           <p class="planilla__cab"><span>From the book</span><span>6/6</span></p>
           <ol>
             <li>Colombia 1982, Tabi 2002, Castillo 2005, Cenicafé 1 in 2016</li>
-            <li>Cenicafé 1: 84.3 % Supremo-size beans</li>
+            <li>Cenicafé 1: 84.3 % Supremo-size beans</li>
             <li>Specialty: 0 primary and max 5 secondary defects per 350 g</li>
-            <li>Borer: economic damage threshold, 5 %</li>
+            <li>Borer: economic damage threshold, 5 %</li>
             <li>Rust in Colombia since 1983; CBD absent</li>
             <li>Four regions, more than twenty departments</li>
             <li>Arabica: 500 to 2,000 meters altitude</li>
@@ -437,6 +434,6 @@ document.addEventListener('keydown',function(e){if(e.key==='Escape'){b.setAttrib
     <p class="site-footer__fine">Beantage Specialty Coffee Roasters, Bogotá, Colombia.</p>
   </div>
 </footer>
-<script type="module" src="/assets/js/home/home.js?v=20261108c"></script>
+<script type="module" src="/assets/js/home/home.js?v=20261109b"></script>
 </body>
 </html>

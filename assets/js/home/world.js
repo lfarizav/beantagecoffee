@@ -171,146 +171,11 @@ function sceneCata(M, beanGeo) {
   };
 }
 
-/* ---------- Scene 2: flat vs conical burrs ---------- */
-function sceneMolinos(M, beanGeo) {
-  const g = new THREE.Group();
-  g.add(mesh(new THREE.BoxGeometry(11, 0.5, 5.5), M.wood, { p: [0, -0.25, 0] }));
-  const plinth = new THREE.MeshStandardMaterial({ color: '#2a1d15', roughness: 0.55, metalness: 0.2 });
-  const dummy = new THREE.Object3D();
-  // flat burr disc with radial, swept cutting teeth
-  function flatBurr() {
-    const d = new THREE.Group();
-    d.add(mesh(P.lathe([[0.28, 0], [1.0, 0], [1.02, 0.08], [1.0, 0.16], [0.28, 0.16], [0.28, 0]], 96), M.steel));
-    const teeth = new THREE.InstancedMesh(new THREE.BoxGeometry(0.46, 0.06, 0.045), M.steelDark, 40 + 12);
-    for (let i = 0; i < 40; i++) {
-      const a = (i / 40) * Math.PI * 2;
-      dummy.position.set(Math.cos(a) * 0.72, 0.19, Math.sin(a) * 0.72); dummy.rotation.set(0, -a + 0.42, 0); dummy.scale.set(1, 1, 1); dummy.updateMatrix(); teeth.setMatrixAt(i, dummy.matrix);
-    }
-    for (let i = 0; i < 12; i++) {
-      const a = (i / 12) * Math.PI * 2;
-      dummy.position.set(Math.cos(a) * 0.4, 0.2, Math.sin(a) * 0.4); dummy.rotation.set(0, -a, 0); dummy.scale.set(0.45, 1.4, 1.6); dummy.updateMatrix(); teeth.setMatrixAt(40 + i, dummy.matrix);
-    }
-    teeth.castShadow = true; d.add(teeth);
-    return d;
-  }
-  const flat = new THREE.Group(); flat.position.set(-1.75, 0, 0); g.add(flat);
-  flat.add(mesh(new THREE.CylinderGeometry(1.15, 1.25, 0.7, 64), plinth, { p: [0, 0.35, 0] }));
-  const lowFlat = flatBurr(); lowFlat.position.y = 1.0; flat.add(lowFlat);
-  const upFlat = flatBurr(); flat.add(upFlat);
-  // conical burr: inner cone with helical teeth inside a fixed outer ring
-  const conical = new THREE.Group(); conical.position.set(1.75, 0, 0); g.add(conical);
-  conical.add(mesh(new THREE.CylinderGeometry(1.15, 1.25, 0.7, 64), plinth, { p: [0, 0.35, 0] }));
-  const ring = new THREE.Group(); ring.position.y = 1.9; conical.add(ring);
-  ring.add(mesh(P.lathe([[0.74, 0], [1.02, 0], [1.05, 0.03], [1.05, 0.87], [1.02, 0.9], [0.5, 0.9], [0.47, 0.87], [0.6, 0.45], [0.72, 0.03], [0.74, 0]], 96), M.steel));
-  const rt = new THREE.InstancedMesh(new THREE.BoxGeometry(0.035, 0.42, 0.06), M.steelDark, 28);
-  for (let i = 0; i < 28; i++) {
-    const a = (i / 28) * Math.PI * 2;
-    dummy.position.set(Math.cos(a) * 0.6, 0.45, Math.sin(a) * 0.6); dummy.rotation.set(0, -a, 0.32); dummy.scale.set(1, 1, 1); dummy.updateMatrix(); rt.setMatrixAt(i, dummy.matrix);
-  }
-  ring.add(rt);
-  const cone = new THREE.Group(); conical.add(cone);
-  cone.add(mesh(P.lathe([[0, 0], [0.64, 0], [0.68, 0.08], [0.52, 0.62], [0.32, 1.0], [0.2, 1.12], [0, 1.14]], 96), M.steel));
-  const SP = 11, SEG = 10;
-  const ct = new THREE.InstancedMesh(new THREE.BoxGeometry(0.05, 0.12, 0.06), M.steelDark, SP * SEG);
-  for (let s = 0; s < SP; s++) for (let k = 0; k < SEG; k++) {
-    const u = k / (SEG - 1), y = 0.1 + u * 0.9, r = 0.66 - u * 0.36 + 0.02, a = (s / SP) * Math.PI * 2 + u * 1.5;
-    dummy.position.set(Math.cos(a) * r, y, Math.sin(a) * r); dummy.rotation.set(0, -a, 0.6); dummy.scale.set(1, 1, 1); dummy.updateMatrix(); ct.setMatrixAt(s * SEG + k, dummy.matrix);
-  }
-  ct.castShadow = true; cone.add(ct);
-  // grounds falling between the burrs into small catch cups
-  const grain = new THREE.BoxGeometry(1, 1, 1);
-  const fallers = [];
-  [flat, conical].forEach((host, hi) => {
-    const N = 140;
-    const im = P.scatter(grain, new THREE.MeshStandardMaterial({ roughness: 1 }), N, (i, r) => ({ x: 0, y: -9, z: 0, s: 0.01 + r() * 0.015 }), ['#5a3820', '#6b4428', '#4a2d18'], 50 + hi);
-    im.castShadow = false;
-    host.add(im);
-    const seeds = []; const r = P.rng(70 + hi);
-    for (let i = 0; i < N; i++) seeds.push({ a: r() * 6.28, rad: 0.95 + r() * 0.25, ph: r(), s: 0.012 + r() * 0.016 });
-    fallers.push({ im, seeds });
-  });
-  // roasted beans in front
-  [-1.75, 1.75].forEach((x, k) => g.add(P.scatter(beanGeo, new THREE.MeshPhysicalMaterial({ roughness: 0.38, clearcoat: 0.4 }), 45, (i, r) => {
-    const a = r() * 6.28, d = Math.sqrt(r()) * 0.7;
-    return { x: x + Math.cos(a) * d, y: 0.05 + r() * 0.04, z: 1.9 + Math.sin(a) * d * 0.5, s: 0.13 };
-  }, ['#3b2414', '#4a2d18', '#2e1b0f'], 80 + k)));
-  const m4 = new THREE.Matrix4(), q = new THREE.Quaternion(), sc = new THREE.Vector3(), ps = new THREE.Vector3();
-  return {
-    group: g,
-    rig: keyRig([[0, [-0.5, 4.2, 10], [-0.5, 1.6, 0]], [0.3, [-0.5, 3.6, 7.6], [-0.5, 1.8, 0]], [0.55, [-1.0, 3.4, 6.6], [-0.7, 1.9, 0]], [0.78, [1.0, 3.8, 6.6], [0.7, 1.9, 0]], [1, [0.4, 4.4, 8.6], [0, 1.6, 0]]]),
-    anchors: [
-      { key: 'planas', pos: V(-1.75, 3.4, 0), range: [0.18, 1] },
-      { key: 'conicas', pos: V(1.75, 4.05, 0), range: [0.18, 1] },
-    ],
-    update(t, time) {
-      const e = smooth(0.08, 0.42, t);
-      const spin = time * (0.6 + e * 1.4);
-      upFlat.position.y = 1.45 + e * 1.15;
-      upFlat.rotation.set(Math.PI - e * 0.55, spin, 0);
-      lowFlat.rotation.set(e * 0.5, 0, 0);
-      cone.position.y = 1.86 - e * 0.45;
-      cone.rotation.set(e * 0.25, spin, 0);
-      ring.position.y = 1.9 + e * 0.95;
-      ring.rotation.set(e * 0.45, 0, 0);
-      fallers.forEach(({ im, seeds }, hi) => {
-        seeds.forEach((s, i) => {
-          const u = (time * 0.5 + s.ph) % 1;
-          const top = hi ? 1.6 : 1.3;
-          ps.set(Math.cos(s.a) * s.rad * (1 + u * 0.3), top - u * (top - 0.72) - u * u * 0.2, Math.sin(s.a) * s.rad * (1 + u * 0.3));
-          q.set(0, 0, 0, 1); sc.setScalar(e > 0.05 ? s.s : 0);
-          m4.compose(ps, q, sc); im.setMatrixAt(i, m4);
-        });
-        im.instanceMatrix.needsUpdate = true;
-      });
-    },
-  };
-}
-
-/* ---------- Scene 3: washed, honey, natural drying beds ---------- */
-function sceneProcesos(M, beanGeo) {
-  const g = new THREE.Group();
-  const dried = P.cherryGeometry(1, 14, 10), fresh = P.cherryGeometry(0, 20, 14), lowBean = P.beanGeometry(12, 8);
-  const trays = [
-    { x: -3.9, geo: lowBean, s: 0.12, sz: 1.2, mat: new THREE.MeshStandardMaterial({ roughness: 0.82 }), colors: ['#dcc9a0', '#e4d4b0', '#cfba8c', '#e9ddc2', '#d4c094'] },
-    { x: 0, geo: lowBean, s: 0.12, sz: 1.15, mat: new THREE.MeshPhysicalMaterial({ roughness: 0.42, clearcoat: 0.75, clearcoatRoughness: 0.25 }), colors: ['#b5702c', '#c4843a', '#9c5a22', '#d09a4c', '#8a4a1e'] },
-    { x: 3.9, geo: dried, s: 0.085, sz: 1, mat: new THREE.MeshStandardMaterial({ roughness: 0.62 }), colors: ['#4a1a17', '#5e231d', '#3a1412', '#6b2f22', '#2e100e'] },
-  ];
-  trays.forEach((tr, ti) => {
-    const t = new THREE.Group(); t.position.set(tr.x, 0, 0);
-    const W = 3.6, D = 2.6, H = 1.0;
-    for (const [lx, lz] of [[-1, -1], [1, -1], [-1, 1], [1, 1]]) t.add(mesh(new THREE.BoxGeometry(0.12, H, 0.12), M.wood, { p: [lx * (W / 2 - 0.1), H / 2, lz * (D / 2 - 0.1)] }));
-    t.add(mesh(new THREE.BoxGeometry(W, 0.06, D), M.woodLight, { p: [0, H, 0] }));
-    t.add(mesh(new THREE.BoxGeometry(W, 0.18, 0.08), M.wood, { p: [0, H + 0.09, D / 2] }));
-    t.add(mesh(new THREE.BoxGeometry(W, 0.18, 0.08), M.wood, { p: [0, H + 0.09, -D / 2] }));
-    t.add(mesh(new THREE.BoxGeometry(0.08, 0.18, D), M.wood, { p: [W / 2, H + 0.09, 0] }));
-    t.add(mesh(new THREE.BoxGeometry(0.08, 0.18, D), M.wood, { p: [-W / 2, H + 0.09, 0] }));
-    const n = ti === 2 ? 420 : 720;
-    t.add(P.scatter(tr.geo, tr.mat, n, (i, r) => ({
-      x: (r() - 0.5) * (W - 0.25), y: H + 0.06 + r() * 0.07 + (i > n * 0.6 ? 0.06 : 0), z: (r() - 0.5) * (D - 0.25), s: tr.s * (0.9 + r() * 0.2), sz: tr.sz,
-    }), tr.colors, 90 + ti));
-    g.add(t);
-  });
-  // wooden rake resting on the washed bed
-  const rake = new THREE.Group(); rake.position.set(-3.9, 1.25, 0.5); rake.rotation.set(0, 0.5, 0.08);
-  rake.add(mesh(new THREE.CylinderGeometry(0.035, 0.035, 3.2, 10), M.woodLight, { r: [0, 0, Math.PI / 2 - 0.15], p: [1.2, 0.2, 0] }));
-  rake.add(mesh(new THREE.BoxGeometry(0.12, 0.1, 1.1), M.woodLight));
-  g.add(rake);
-  // fresh ripe cherries: the shared starting point
-  g.add(P.scatter(fresh, new THREE.MeshPhysicalMaterial({ roughness: 0.3, clearcoat: 0.9, clearcoatRoughness: 0.1 }), 34, (i, r) => {
-    const a = r() * 6.28, d = Math.sqrt(r()) * 0.75;
-    return { x: Math.cos(a) * d, y: 0.1 + r() * 0.08, z: 2.5 + Math.sin(a) * d * 0.55, s: 0.11 };
-  }, ['#a8322a', '#b8352b', '#8f2620', '#c4492e', '#9e2a24'], 120));
-  return {
-    group: g,
-    rig: keyRig([[0, [0, 8.4, 11.8], [0.3, 1.0, 0.4]], [0.12, [0, 8.4, 11.8], [0.3, 1.0, 0.4]], [0.25, [-3.9, 3.3, 3.9], [-3.9, 1.05, 0]], [0.5, [0, 3.3, 3.9], [0, 1.05, 0]], [0.74, [3.9, 3.3, 3.9], [3.9, 1.05, 0]], [0.86, [2.5, 5.2, 8.2], [1.4, 1.0, 0]], [1, [2.5, 5.2, 8.2], [1.4, 1.0, 0]]]),
-    anchors: [
-      { key: 'lavado', pos: V(-3.9, 1.55, -0.9), range: [0.05, 1] },
-      { key: 'honey', pos: V(0, 1.55, -0.9), range: [0.05, 1] },
-      { key: 'natural', pos: V(3.9, 1.55, -0.9), range: [0.05, 1] },
-      { key: 'cerezas', pos: V(0, 0.5, 2.5), range: [0, 0.2] },
-    ],
-    update() {},
-  };
+/* ---------- Scenes 2 and 3: pre-rendered Blender sequences ----------
+   Grinders (scene 2) and drying beds (scene 3) are Cycles renders scrubbed by scroll in an overlay
+   (secuencia.js). The 3D world keeps an empty slot so scene indices and spacing stay the same. */
+function sceneVideo() {
+  return { group: new THREE.Group(), rig: () => ({ pos: V(0, 4, 10), tgt: V(0, 1, 0) }), anchors: [], update() {}, video: true };
 }
 
 /* ---------- Scene 4: brewing methods (V60, Chemex, French press, AeroPress) ---------- */
@@ -541,7 +406,7 @@ export function createWorld(canvas, pinEls, opts = {}) {
 
   const M = materials();
   const beanGeo = P.beanGeometry(18, 12);
-  const builders = [sceneCata, sceneMolinos, sceneProcesos, sceneMetodos, sceneHistoria, sceneColombia];
+  const builders = [sceneCata, sceneVideo, sceneVideo, sceneMetodos, sceneHistoria, sceneColombia];
   const scenes = builders.map((b, i) => {
     const s = b(M, beanGeo);
     s.group.position.set(i * SPACING, i === 2 || i === 4 || i === 5 ? -0.6 : 0, 0);
@@ -603,8 +468,12 @@ export function createWorld(canvas, pinEls, opts = {}) {
       el.style.transform = `translate3d(${((tmp.x + 1) / 2 * W).toFixed(1)}px, ${((1 - tmp.y) / 2 * H).toFixed(1)}px, 0)`;
       el.dataset.on = '1';
     });
+    state.show = show; state.t = localT; state.opacity = opacity; state.video = !!s.video;
+    return state;
   }
-  function render() { renderer.render(scene, camera); }
+  const state = { show: 0, t: 0, opacity: 1, video: false };
+  // a video scene covers the canvas, so the WebGL frame is skipped while it is on screen
+  function render() { if (!state.video || state.opacity < 0.98) renderer.render(scene, camera); }
   function setBackground(col) { bg.set(col); scene.fog.color.set(col); }
   // Adaptive quality: 2 full, 1 pixel ratio 1, 0 also without shadows.
   function setQuality(q) {

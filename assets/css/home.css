@@ -111,3 +111,7 @@ html:not(.con-3d) .escena{width:100%;max-width:var(--max);margin-inline:auto;pad
 @media (prefers-reduced-motion:reduce){
   .pin,.escena__texto{transition:none}
 }
+
+/* scenes 2 and 3: Blender renders scrubbed by scroll, laid over the WebGL canvas */
+.secuencias{position:absolute;inset:0;pointer-events:none}
+.secuencia{position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;display:block}

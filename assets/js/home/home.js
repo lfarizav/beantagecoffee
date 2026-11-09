@@ -1,7 +1,7 @@
 // Home boot: decides between the WebGL scenes and the static illustrated panels.
 // The inline head script sets html.con-3d only when WebGL2 exists and the visitor
 // has not asked for reduced motion. three.js is imported after first paint.
-const V = '20261108a';
+const V = '20261109b';
 const GSAP = 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/';
 const root = document.documentElement;
 
@@ -28,6 +28,7 @@ async function start() {
     await loadScript(GSAP + 'gsap.min.js');
     await loadScript(GSAP + 'ScrollTrigger.min.js');
     const { createWorld } = await import(`./world.js?v=${V}`);
+    const { createSequences } = await import(`./secuencia.js?v=${V}`);
     const css = getComputedStyle(root);
     const paper = () => (getComputedStyle(document.body).backgroundColor || css.getPropertyValue('--papel') || '#f3ece1').trim();
     // the sticky site header sits above the narrow-screen scene band
@@ -39,6 +40,7 @@ async function start() {
     gsap.registerPlugin(ST);
 
     const articles = [...section.querySelectorAll('.escena')];
+    const seq = createSequences(section.querySelector('.escenario'), articles, V);
     let target = 0, current = 0;
     ST.create({
       trigger: section, start: 'top top', end: 'bottom bottom',
@@ -84,7 +86,7 @@ async function start() {
     const loop = (now) => {
       const dt = Math.min(0.05, (now - last) / 1000); last = now; time += dt;
       current += (target - current) * Math.min(1, dt * 6);
-      world.update(current, time);
+      seq.update(world.update(current, time));
       world.render();
       tune(now);
       raf = visible && !document.hidden ? requestAnimationFrame(loop) : 0;
@@ -96,9 +98,9 @@ async function start() {
     addEventListener('resize', () => { clearTimeout(rt); rt = setTimeout(() => { setHdr(); world.resize(); ST.refresh(); }, 120); });
     window.addEventListener('bt-theme-change', () => setTimeout(() => world.setBackground(paper()), 50));
     matchMedia('(prefers-reduced-motion: reduce)').addEventListener('change', (e) => { if (e.matches) { cancelAnimationFrame(raf); visible = false; giveUp(); } });
-    window.__home = { world, get p() { return current; }, get q() { return q; },
+    window.__home = { world, seq, get p() { return current; }, get q() { return q; },
       // test hook: settle the scroll target, render once, stop the loop
-      still() { current = target = progress(); visible = false; cancelAnimationFrame(raf); raf = 0; world.update(current, time); world.render(); return current; } };
+      still() { current = target = progress(); visible = false; cancelAnimationFrame(raf); raf = 0; seq.update(world.update(current, time)); world.render(); return current; } };
     root.classList.add('escena-lista');
   } catch (err) {
     giveUp(err);
