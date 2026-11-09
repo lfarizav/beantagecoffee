@@ -1,7 +1,7 @@
 // Home boot: decides between the WebGL scenes and the static illustrated panels.
 // The inline head script sets html.con-3d only when WebGL2 exists and the visitor
 // has not asked for reduced motion. three.js is imported after first paint.
-const V = '20261109c';
+const V = '20261109d';
 const GSAP = 'https://cdn.jsdelivr.net/npm/gsap@3.13.0/dist/';
 const root = document.documentElement;
 

@@ -78,83 +78,11 @@ function leafyShrub(M, h = 1.4, seed = 1, cherries = 16) {
   return s;
 }
 
-/* ---------- Scenes 1 to 3: pre-rendered Blender sequences ----------
-   Cupping (scene 1), grinders (scene 2) and drying beds (scene 3) are Cycles renders scrubbed by scroll in an overlay
+/* ---------- Scenes 1 to 4: pre-rendered Blender sequences ----------
+   Cupping (scene 1), grinders (scene 2), drying beds (scene 3) and brewing methods (scene 4) are Cycles renders scrubbed by scroll in an overlay
    (secuencia.js). The 3D world keeps an empty slot so scene indices and spacing stay the same. */
 function sceneVideo() {
   return { group: new THREE.Group(), rig: () => ({ pos: V(0, 4, 10), tgt: V(0, 1, 0) }), anchors: [], update() {}, video: true };
-}
-
-/* ---------- Scene 4: brewing methods (V60, Chemex, French press, AeroPress) ---------- */
-function sceneMetodos(M) {
-  const g = new THREE.Group();
-  g.add(mesh(new THREE.BoxGeometry(14, 0.6, 6), M.wood, { p: [0, -0.3, 0] }));
-  // V60 on a glass server
-  const v60 = new THREE.Group(); v60.position.set(-3.3, 0, 0); g.add(v60);
-  v60.add(mesh(P.lathe([[0, 0], [0.42, 0], [0.5, 0.06], [0.56, 0.3], [0.55, 0.62], [0.44, 0.9], [0.4, 1.0]]), M.glass, { cast: false }));
-  v60.add(mesh(P.lathe([[0, 0.02], [0.44, 0.02], [0.53, 0.2], [0.54, 0.28], [0, 0.28]]), M.coffee));
-  const drip = new THREE.Group(); drip.position.y = 1.0; v60.add(drip);
-  drip.add(mesh(new THREE.CylinderGeometry(0.56, 0.58, 0.06, 64), M.ceramic, { p: [0, 0.03, 0] }));
-  drip.add(mesh(P.lathe([[0.09, 0.06], [0.17, 0.06], [0.7, 0.9], [0.73, 0.95], [0.67, 0.96], [0.13, 0.12], [0.09, 0.12]], 72), M.ceramic));
-  drip.add(mesh(new THREE.TorusGeometry(0.3, 0.05, 12, 30, Math.PI), M.ceramic, { p: [0.72, 0.5, 0], r: [0, 0, -Math.PI / 2] }));
-  for (let i = 0; i < 12; i++) { // spiral ribs inside the cone
-    const pts = [];
-    for (let k = 0; k <= 12; k++) { const u = k / 12, y = 0.16 + u * 0.74, r = 0.13 + u * 0.52, a = (i / 12) * Math.PI * 2 + u * 0.9; pts.push(V(Math.cos(a) * r, y, Math.sin(a) * r)); }
-    drip.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3(pts), 16, 0.012, 5), M.ceramic, { cast: false }));
-  }
-  drip.add(mesh(P.lathe([[0.04, 0.14], [0.62, 0.98], [0.64, 1.06]], 56), M.paper, { cast: false }));
-  drip.add(mesh(new THREE.CircleGeometry(0.36, 40), M.crust, { p: [0, 0.52, 0], r: [-Math.PI / 2, 0, 0] }));
-  const drop = mesh(new THREE.SphereGeometry(0.025, 10, 8), M.coffee, { cast: false }); v60.add(drop);
-  // Chemex
-  const chemex = new THREE.Group(); chemex.position.set(-1.1, 0, -0.2); g.add(chemex);
-  chemex.add(mesh(P.lathe([[0, 0], [0.55, 0], [0.68, 0.15], [0.71, 0.45], [0.52, 0.85], [0.21, 1.14], [0.2, 1.26], [0.44, 1.55], [0.62, 1.96], [0.64, 2.02]], 72), M.glass, { cast: false }));
-  chemex.add(mesh(P.lathe([[0, 0.02], [0.54, 0.02], [0.66, 0.16], [0.69, 0.38], [0, 0.38]]), M.coffee));
-  chemex.add(mesh(P.lathe([[0.215, 1.0], [0.33, 1.05], [0.37, 1.2], [0.33, 1.36], [0.215, 1.42], [0.215, 1.0]], 48), M.woodLight));
-  chemex.add(mesh(new THREE.TorusGeometry(0.375, 0.016, 8, 48), M.leather, { p: [0, 1.2, 0], r: [Math.PI / 2, 0, 0] }));
-  chemex.add(mesh(new THREE.SphereGeometry(0.05, 12, 10), M.woodLight, { p: [0.39, 1.12, 0.06] }));
-  chemex.add(mesh(P.lathe([[0.18, 1.3], [0.42, 1.6], [0.6, 2.0], [0.62, 2.1]], 48), M.paper, { cast: false }));
-  // French press
-  const press = new THREE.Group(); press.position.set(1.1, 0, 0); g.add(press);
-  press.add(mesh(new THREE.CylinderGeometry(0.48, 0.48, 1.3, 56, 1, true), M.glass, { p: [0, 0.72, 0], cast: false }));
-  press.add(mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.86, 48), new THREE.MeshPhysicalMaterial({ color: '#2a150b', roughness: 0.2, transmission: 0.15, thickness: 0.5 }), { p: [0, 0.5, 0] }));
-  press.add(mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.08, 48), M.crust, { p: [0, 0.96, 0] }));
-  press.add(mesh(new THREE.CylinderGeometry(0.53, 0.55, 0.16, 56, 1, true), M.steel, { p: [0, 0.08, 0] }));
-  press.add(mesh(new THREE.CylinderGeometry(0.55, 0.55, 0.03, 56), M.steel, { p: [0, 0.015, 0] }));
-  for (const a of [0.6, -0.6]) press.add(mesh(new THREE.BoxGeometry(0.06, 1.3, 0.02), M.steel, { p: [Math.sin(a + Math.PI / 2) * 0.5, 0.72, Math.cos(a + Math.PI / 2) * 0.5], r: [0, a + Math.PI / 2, 0] }));
-  press.add(mesh(new THREE.TubeGeometry(new THREE.CatmullRomCurve3([V(0.5, 1.15, 0), V(0.9, 1.1, 0), V(0.95, 0.4, 0), V(0.5, 0.3, 0)]), 30, 0.055, 10), M.blackSteel));
-  press.add(mesh(new THREE.CylinderGeometry(0.5, 0.5, 0.08, 56), M.steel, { p: [0, 1.4, 0] }));
-  press.add(mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.9, 10), M.steel, { p: [0, 1.25, 0] }));
-  press.add(mesh(new THREE.SphereGeometry(0.09, 16, 12), M.blackSteel, { p: [0, 1.75, 0] }));
-  press.add(mesh(new THREE.CylinderGeometry(0.02, 0.02, 0.3, 10), M.steel, { p: [0, 1.58, 0] }));
-  const plunger = mesh(new THREE.CylinderGeometry(0.46, 0.46, 0.03, 48), M.steelDark, { p: [0, 1.1, 0] }); press.add(plunger);
-  // AeroPress on a mug
-  const aero = new THREE.Group(); aero.position.set(3.3, 0, 0.1); g.add(aero);
-  aero.add(mesh(P.lathe([[0, 0], [0.4, 0], [0.44, 0.05], [0.46, 0.7], [0.45, 0.72], [0.42, 0.72], [0.41, 0.08], [0, 0.07]]), M.ceramic));
-  aero.add(mesh(new THREE.TorusGeometry(0.2, 0.05, 12, 30, Math.PI), M.ceramic, { p: [0.46, 0.38, 0], r: [0, 0, -Math.PI / 2] }));
-  aero.add(mesh(new THREE.CylinderGeometry(0.45, 0.45, 0.04, 6), M.smoke, { p: [0, 0.74, 0] }));
-  aero.add(mesh(new THREE.CylinderGeometry(0.36, 0.36, 0.1, 40), M.rubber, { p: [0, 0.8, 0] }));
-  aero.add(mesh(new THREE.CylinderGeometry(0.32, 0.32, 1.0, 48, 1, true), M.smoke, { p: [0, 1.3, 0], cast: true }));
-  aero.add(mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.42, 40), new THREE.MeshStandardMaterial({ color: '#2a150b', roughness: 0.3 }), { p: [0, 1.06, 0] }));
-  const aeroPl = new THREE.Group(); aero.add(aeroPl);
-  aeroPl.add(mesh(new THREE.CylinderGeometry(0.29, 0.29, 1.0, 40), M.smoke, { p: [0, 0.5, 0] }));
-  aeroPl.add(mesh(new THREE.CylinderGeometry(0.3, 0.3, 0.06, 40), M.rubber, { p: [0, 0.02, 0] }));
-  aeroPl.add(mesh(new THREE.CylinderGeometry(0.4, 0.4, 0.05, 40), M.smoke, { p: [0, 1.0, 0] }));
-  return {
-    group: g,
-    rig: keyRig([[0, [0, 4.4, 10.5], [0, 1.0, 0]], [0.3, [-1.8, 3.2, 6.4], [-2.2, 1.1, 0]], [0.45, [-1.8, 3.2, 6.4], [-2.2, 1.1, 0]], [0.62, [2.6, 3.2, 6.4], [2.2, 1.1, 0]], [0.74, [2.6, 3.2, 6.4], [2.2, 1.1, 0]], [0.86, [1.0, 4.2, 9.2], [0.4, 1.0, 0]], [1, [1.0, 4.2, 9.2], [0.4, 1.0, 0]]]),
-    anchors: [
-      { key: 'v60', pos: V(-3.3, 2.25, 0), range: [0.08, 1] },
-      { key: 'chemex', pos: V(-1.1, 2.35, -0.2), range: [0.08, 1] },
-      { key: 'prensa', pos: V(1.1, 2.05, 0), range: [0.08, 1] },
-      { key: 'aeropress', pos: V(3.3, 2.55, 0.1), range: [0.08, 1] },
-    ],
-    update(t, time) {
-      const u = (time * 0.9) % 1;
-      drop.position.set(0, 1.0 - u * 0.68, 0); drop.visible = u < 0.95;
-      plunger.position.y = 1.1 - smooth(0.5, 0.75, t) * 0.12;
-      aeroPl.position.y = 1.85 - smooth(0.62, 0.84, t) * 0.5;
-    },
-  };
 }
 
 /* ---------- Scene 5: history timeline ---------- */
@@ -313,7 +241,7 @@ export function createWorld(canvas, pinEls, opts = {}) {
 
   const M = materials();
   const beanGeo = P.beanGeometry(18, 12);
-  const builders = [sceneVideo, sceneVideo, sceneVideo, sceneMetodos, sceneHistoria, sceneColombia];
+  const builders = [sceneVideo, sceneVideo, sceneVideo, sceneVideo, sceneHistoria, sceneColombia];
   const scenes = builders.map((b, i) => {
     const s = b(M, beanGeo);
     s.group.position.set(i * SPACING, i === 2 || i === 4 || i === 5 ? -0.6 : 0, 0);
